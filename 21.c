@@ -2,7 +2,7 @@
 
 int * plaats_van(const double[],int, double);
 void plaats_ptr_op_getal(const double[],int,double **,double);
-int * plaats_in_geordende_array_van(const double[],int,double);
+double * plaats_in_geordende_array_van(const double[],int,double);
 
 int main(void){
   double array[] = {1.0,2.0,2.3,5.6,6.1,7.9};
@@ -14,12 +14,12 @@ int main(void){
   plaats_ptr_op_getal(array,size,&pointer,5.6);
   printf("\n%.2f\n",*pointer);
 
-  array[4] *= 2;
-  printf("\n%.2f\n",*pointer);
 
-  int * index_geordend = plaats_in_geordende_array_van(array,size,6.1);
-  printf("ordered = %d\n",*index_geordend);
 
+  double * index_geordend = plaats_in_geordende_array_van(array,size,6.1);
+  printf("ordered = %f\n",*index_geordend);
+	array[4] *= 2;
+	printf("\n%.2f\n",*pointer);
 }
 
 int * plaats_van(const double array[], int size, double getal){
@@ -45,17 +45,23 @@ void plaats_ptr_op_getal(const double array[],int size,double **pointer,double g
   *pointer = (array +i);
 }
 
-int * plaats_in_geordende_array_van(const double array[],int size,double getal){
-  int index = 0;
-  while(*(array + index) != getal && index < size && getal >= *(array + index)){
-    index++;
+double * plaats_in_geordende_array_van(const double array[],int size,double getal){
+  int left = 0;
+  int right = size -1;
+  int index = size/2;
+
+  while(array[index] != getal){
+  	if(left > right){
+  		return 0;
+	  }
+	  index = (left + right)/2;
+	  if(array[index] < getal){
+	  	left = index +1;
+	  }else if(array[index] > getal){
+	  	right = index -1;
+	  }
   }
-  printf("%f\n",*(array + index) );
-  int * result;
-  if(*(array + index) == getal){
-    result = &index;
-  }else{
-    result = NULL;
-  }
+
+  double *result = &array[index];
   return result;
 }
