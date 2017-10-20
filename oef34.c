@@ -26,6 +26,6 @@ void schrijf_ints(int * ints){
 }
 
 void schrijf_deeltal(Deeltal d){
-	printf("%d",d.waarde);
+	printf("%d ",d.waarde);
 	schrijf_ints(d.delers);
 }
