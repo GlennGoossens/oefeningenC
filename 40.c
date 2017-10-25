@@ -13,8 +13,7 @@ void voeg_getal_toe(knoop **,int);
 void print_lijst(knoop *);
 void verwijder_dubbels(knoop *);
 void keerom(knoop **);
-knoop * merge(const knoop *,const knoop *,int, int);
-int size(const knoop *);
+knoop * merge(const knoop *,const knoop *);
 
 int main(){
   srand(time(NULL));
@@ -23,9 +22,7 @@ knoop * n = maak_gesorteerde_lijst_automatisch(5,1000);
 printf("\nLIJST m:\n"); print_lijst(m);
 printf("\nLIJST n:\n"); print_lijst(n);
 printf("\nDeze worden gemerged. \n\n");
-int size_m = size(m);
-int size_n = size(n);
-knoop * mn = merge(m,n,size_m,size_n);
+knoop * mn = merge(m,n);
 printf("\nLIJST m: \n"); print_lijst(m);
 printf("\nLIJST n: \n"); print_lijst(n);
 printf("\nRESULTAAT: \n"); print_lijst(mn);
@@ -102,57 +99,48 @@ void keerom(knoop **l){
 }
 
 
-knoop * merge(const knoop *a ,const knoop *b,int size_a, int size_b){
-	
-	int total_size = size_a + size_b;
-	knoop * merge = malloc(total_size*sizeof(knoop));
-	
-	while(a && b ){
-		if(a->getal < b->getal){
-			voeg_getal_toe(&merge,a->getal);
-			merge = merge->next;
-			a = a->next;
-			printf("Merged in number : %d\n",merge->getal);
-		}else{
-			voeg_getal_toe(&merge,b->getal);
-			merge = merge->next;
-			b = b->next;
-			printf("Merged in number : %d\n",merge->getal);
-		}
-	}	
-	while(a){
-			voeg_getal_toe(&merge,a->getal);
-			merge = merge->next;
-			a = a->next;
-			printf("Merged in number : %d\n",merge->getal);
-	}
-	while(b){
-			voeg_getal_toe(&merge,b->getal);
-			merge = merge->next;
-			b = b->next;
-			printf("Merged in number : %d\n",merge->getal);
-	}
+knoop * merge(const knoop *a ,const knoop *b){
+	knoop * merge = (knoop *) malloc(sizeof(knoop));
+  knoop * hulp;
+
+    printf("Start merging\n");
+  if(a->getal < b->getal){
+    merge->getal = a->getal;
+    printf("mergen van getal %d\n",a->getal);
+    a = a->next;
+  }else{
+    merge->getal = b->getal;
+    printf("mergen van getal %d\n",b->getal);
+    b = b->next;
+  }
+  hulp = merge;
+
+  while(a && b){
+    hulp->next = malloc(sizeof(knoop));
+    hulp = hulp->next;
+    if(a->getal < b->getal){
+      hulp->getal = a->getal;
+        printf("mergen van getal %d\n",a->getal);
+      a = a->next;
+    }else{
+      hulp->getal = b->getal;
+        printf("mergen van getal %d\n",b->getal);
+      b = b->next;
+    }
+  }
+  while(a){
+    hulp->next = malloc(sizeof(knoop));
+    hulp = hulp->next;
+    hulp->getal = a->getal;
+    a = a->next;
+  }
+  while(b){
+    hulp->next = malloc(sizeof(knoop));
+    hulp = hulp->next;
+    hulp->getal = b->getal;
+    b = b->next;
+  }
+  hulp->next = 0;
+
 	return merge;
 }
-
-int size(const knoop * l){
-	int i = 0;
-	while(l){
-		i++;
-		l = l->next;
-	}
-	return i;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

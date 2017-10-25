@@ -12,19 +12,17 @@ knoop * maak_gesorteerde_lijst_automatisch(int,int);
 void voeg_getal_toe(knoop **,int);
 void print_lijst(knoop *);
 void verwijder_dubbels(knoop *);
-void keerom(knoop **);
+void keerm(knoop **);
 
 int main(){
   srand(time(NULL));
-  knoop * l = maak_gesorteerde_lijst_automatisch(10,100);
+  knoop * l = maak_gesorteerde_lijst_automatisch(10,10);
   print_lijst(l);
   printf("\nnu worden dubbels verwijderd: \n");
   verwijder_dubbels(l); /* aan te vullen */
   printf("\nna verwijderen van dubbels: \n\n");
   print_lijst(l);
-  printf("\n na omkeren van de lijst: \n\n");
-  keerom(&l);
-  print_lijst(l);
+  /*... aan te vullen */
 
 return 0;
 }
@@ -87,15 +85,10 @@ void verwijder_dubbels(knoop * l){
 }
 
 void keerom(knoop **l){
-  knoop * vorige = 0;
-  knoop * huidige = *l;
-  knoop * volgende;
-
-  while(huidige){
-    volgende = huidige->next;
-    huidige->next = vorige;
-    vorige = huidige;
-    huidige = volgende;
+  knoop * eerste = l;
+  knoop * laatste = l;
+  while(laatste){
+    laatste = laatste->next;
   }
-  *l = vorige;
+
 }
