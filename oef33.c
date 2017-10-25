@@ -4,6 +4,7 @@
 #define GEMIDDELDE_LENGTE_WOORDEN 7
 #define LENGTE_ARRAY_T AANTAL_WOORDEN * (1+GEMIDDELDE_LENGTE_WOORDEN)
 
+<<<<<<< HEAD
 /* versie met indexering van pt */ /*
 void lees(char ** pt){
 int i;
@@ -27,11 +28,33 @@ void schrijf(char const * const * pt){
     printf("\n%s",*pt);
     pt ++;
   }
+=======
+void lees(char *(*pt)){
+ /* gebruik schuivende pointers, geen indexering */
+ 	
+}
+
+void schrijf(char *(*pt)){
+
+>>>>>>> 70b9efc2df9f62b03805e11f5c37c71a711cdab1
 }
 int main(){
+<<<<<<< HEAD
   char* pt[AANTAL_WOORDEN+1]; /* zodat je ook nog een nullpointer kan wegsteken op het einde van de pointertabel */
   char t[LENGTE_ARRAY_T]; pt[0] = t;
   printf("Geef %d woorden in:\n",AANTAL_WOORDEN); lees(pt);
   schrijf(pt);
   return 0;
+=======
+	char* pt[AANTAL_WOORDEN+1]; /* zodat je ook nog een nullpointer kan wegsteken op het einde van de pointertabel */
+	
+	char t[LENGTE_ARRAY_T];
+	pt[0] = t;
+	
+	printf("Geef %d woorden in:\n",AANTAL_WOORDEN);
+	lees(pt); /* leest alle woorden in */
+	schrijf(pt); /* schrijft alle woorden onder elkaar uit*/
+	
+return 0;
+>>>>>>> 70b9efc2df9f62b03805e11f5c37c71a711cdab1
 }
